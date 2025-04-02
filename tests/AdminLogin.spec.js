@@ -3,6 +3,8 @@ import {Login} from '../pages/Login';
 import {CreaOrg} from '../pages/CreateOrganization'
 
 test('AdminLogin',async({page})=>{
+//View in Full page
+await page.setViewportSize({ width: 1920, height: 1080 });
 
 //Login Into the Admin Page
 const login=new Login(page);
