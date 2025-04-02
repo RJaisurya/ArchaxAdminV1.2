@@ -9,7 +9,8 @@ class CreateOrganization{
         this.email="//input[@id='email_id-0']";
         this.fireBlock="//input[@id='fireblock_key-0']";
         this.adminMail="//input[@id='organization_admin_email-0']";
-        this.savebtn="//div[@class='BtnWrap']";
+        this.savebtn="//div[@class='BtnWrap']";    
+        this.gotoDashboard="//button[normalize-space()='Go To Dashboard']"; 
     }
 
     async gotoOrgCrt(){
@@ -35,5 +36,8 @@ class CreateOrganization{
     }
     async saveOrg(){
         await this.page.locator(this.savebtn).click();
+    }
+    async dashboard(){
+        await this.page.locator(this.gotoDashboard).click();
     }
 }
