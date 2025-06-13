@@ -5,10 +5,11 @@ class CreateOrganization{
         this.addnew="//span[@class='text-base md:text-lg']";
         this.orgName="//input[@id='name-0']";
         this.orgWeb="//input[@id='website-0']";
+        this.phDropDown="//select[@class='px-2 py-2 bg-white text-black outline-none !bg-transparent border-none text-white mr-2 custom-select']";
         this.phoneNum="//input[@id='phone_number-0']";
         this.email="//input[@id='email_id-0']";
         this.fireBlock="//input[@id='fireblock_key-0']";
-        this.adminMail="//input[@id='organization_admin_email-0']";
+        this.adminMail="//input[@id='Organisation-0']";
         this.savebtn="//div[@class='BtnWrap']";    
         this.gotoDashboard="//button[normalize-space()='Go To Dashboard']"; 
     }
@@ -22,8 +23,22 @@ class CreateOrganization{
     async orgWebInput(orgWeb){
         await this.page.locator(this.orgWeb).fill(orgWeb);
     }
-    async phoneNumInput(phoneNum){
-        await this.page.locator(this.phoneNum).fill(phoneNum);
+    async phoneNumInput(cntry,phonNum){
+        await this.page.locator(this.phDropDown).click();
+        await this.page.waitForTimeout(2000);
+        const phNum=await this.page.$$(this.phDropDown);
+        for(const cont of phNum){
+            const text=await cont.textContent();
+            //console.log(text);      //For Debugging
+            
+            if(text.includes(cntry)){
+                await this.page.locator(this.phDropDown).selectOption({value: cntry});
+                break;
+            }
+        }
+      
+       
+        await this.page.locator(this.phoneNum).fill(phonNum);
     }
     async emailInput(email){
         await this.page.locator(this.email).fill(email);

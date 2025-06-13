@@ -2,7 +2,7 @@ exports.Subadmin=
 class subadmin{
     constructor(page){
         this.page=page;
-        this.gotoSub="//span[normalize-space()='SubAdmin']";
+        this.gotoSub="//span[normalize-space()='Sub-Admin'] ";
         this.add="//span[@class='text-base md:text-lg']";
         this.adname="//input[@id='name-0']";
         this.email="//input[@id='email-0']";
@@ -23,8 +23,15 @@ class subadmin{
              "//input[@value='Read']"   
         ]
         this.dash="//button[normalize-space()='Go To Dashboard']";
+        this.mailin="//input[@id='login']";
+        this.mailnxt="//i[@class='material-icons-outlined f36']";
+        this.mailtab="//iframe[@id='ifinbox']";
+        this.mailMsg="//div[@id='e_ZwHjAQN3ZGR0ZGZlZQNjAGD2ZmVkAD==']//button[@class='lm']";
+        this.setPass="//a[normalize-space()='Set Your Password']";
+        this.refresh="//button[@id='refresh']";
+        this.frame1="//iframe[@id='ifmail']";
     }
-
+   
     async gotoSubAdmin(){
         await this.page.locator(this.gotoSub).click();
         await this.page.locator(this.add).click();
@@ -59,4 +66,32 @@ class subadmin{
     async gotoDash(){
         await this.page.locator(this.dash).click();
     }
+    async gotoMailPage(){
+        await this.page.goto("https://yopmail.com/en/");
+
+    }
+
+    async mailInBox(mailname){
+        await this.page.locator(this.mailin).fill(mailname);
+    }
+    async mailNext() {
+        await this.page.locator(this.mailnxt).click();
+    }
+    
+    async mailTab() {
+        const frame1 = this.page.frameLocator(this.mailtab);
+        await frame1.locator(this.mailMsg).click();
+    }
+   
+    async refIcon(){
+        await this.page.locator(this.refresh).click();
+    }
+    async setPassword(){   
+        await this.page.frame1.locator(this.setPass).click();   
+    }
+
+
+    
+
+
 }
